@@ -82,6 +82,9 @@ def get(path):
 
     response.status = r.status_code
     response.headers.update(r.headers)
+    if "Transfer-Encoding" in response.headers.keys():
+        print("removing transfer-encoding")
+        del response.headers["Transfer-Encoding"]
     return r.content
 
 @app.get('/', method=METHODS)
